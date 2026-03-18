@@ -107,11 +107,11 @@ void UI::displayHeader(const std::string &title, const std::string &subtitle) co
     std::cout << boxChars.topRight << std::endl;
 
     // 标题
-    std::cout << boxChars.vertical << centerText(title, width - 2) << boxChars.vertical << std::endl;
+    std::cout << boxChars.vertical << centerText(title, width + 5) << boxChars.vertical << std::endl;
 
     // 子标题 (若有)
     if (!subtitle.empty()) {
-        std::cout << boxChars.vertical << centerText(subtitle, width - 2) << boxChars.vertical << std::endl;
+        std::cout << boxChars.vertical << centerText(subtitle, width + 3) << boxChars.vertical << std::endl;
     }
 
     // 下边框

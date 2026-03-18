@@ -67,7 +67,7 @@ void ensureSeedMembers(MemberManager& memberManager) {
     // 首次启动时的默认管理员和成员
     const Member admin(
         "A20261001",
-        "System Admin",
+        "系统Admin",
         "13000000000",
         std::vector<std::string>{"Science", "History"},
         today,
@@ -79,7 +79,7 @@ void ensureSeedMembers(MemberManager& memberManager) {
 
     const Member user(
         "M20261001",
-        "Default User",
+        "普通用户",
         "13100000000",
         std::vector<std::string>{"Fiction", "Biography"},
         today,

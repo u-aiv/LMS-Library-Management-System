@@ -112,12 +112,12 @@ Member* MenuHandler::getCurrentUser() const {
 // 菜单显示方法
 
 void MenuHandler::displayWelcomeScreen() {
-    ui.displayHeader("Library Management System");
+    ui.displayHeader("图书馆管理系统");
     std::cout << "\n";
     std::cout << "  ╔════════════════════════════════════════════╗\n";
-    std::cout << "  ║                    图书馆管理系统                 ║";
+    std::cout << "  ║               图书馆管理系统               ║\n";
     std::cout << "  ║                                            ║\n";
-    std::cout << "  ║            您 的 知 识 与 学 习 门 户               ║\n";
+    std::cout << "  ║         您 的 知 识 与 学 习 门 户         ║\n";
     std::cout << "  ╚════════════════════════════════════════════╝\n";
     std::cout << "\n";
 }
@@ -127,23 +127,23 @@ void MenuHandler::displayMemberMenu() {
 
     std::cout << "\n";
     std::cout << "┌─────────────────────────────────────────┐\n";
-    std::cout << "│   书籍操作                                  │\n";
+    std::cout << "│   书籍操作                              │\n";
     std::cout << "├─────────────────────────────────────────┤\n";
-    std::cout << "│  1. 搜索图书                                │\n";
+    std::cout << "│  1. 搜索图书                            │\n";
     std::cout << "│  2. 借阅图书                            │\n";
     std::cout << "│  3. 归还图书                            │\n";
-    std::cout << "│  4. 续约图书                             │\n";
-    std::cout << "│  5. 预约图书                           │\n";
+    std::cout << "│  4. 续约图书                            │\n";
+    std::cout << "│  5. 预约图书                            │\n";
     std::cout << "├─────────────────────────────────────────┤\n";
-    std::cout << "│   账户操作                                  │\n";
+    std::cout << "│   账户操作                              │\n";
     std::cout << "├─────────────────────────────────────────┤\n";
     std::cout << "│  6. 查看借书                            │\n";
-    std::cout << "│  7. 查看借阅历史                              │\n";
+    std::cout << "│  7. 查看借阅历史                        │\n";
     std::cout << "│  8. 查看预订                            │\n";
     std::cout << "│  9. 查看推荐                            │\n";
     std::cout << "│ 10. 个人资料                            │\n";
     std::cout << "├─────────────────────────────────────────┤\n";
-    std::cout << "│  0. 注销                                  │\n";
+    std::cout << "│  0. 注销                                │\n";
     std::cout << "└─────────────────────────────────────────┘\n\n";
 
     int choice = promptForInt("请输入您的选择: ", 0, 11);
@@ -172,7 +172,7 @@ void MenuHandler::displayAdminMenu() {
 
     std::cout << "\n";
     std::cout << "┌─────────────────────────────────────────┐\n";
-    std::cout << "│                  管理员                   │\n";
+    std::cout << "│                 管理员                  │\n";
     std::cout << "├─────────────────────────────────────────┤\n";
     std::cout << "│  1. 管理图书                            │\n";
     std::cout << "│  2. 管理会员                            │\n";
@@ -182,7 +182,7 @@ void MenuHandler::displayAdminMenu() {
     std::cout << "│  6. 备份还原                            │\n";
     std::cout << "│  7. 系统设置                            │\n";
     std::cout << "├─────────────────────────────────────────┤\n";
-    std::cout << "│  0. 注销                                  │\n";
+    std::cout << "│  0. 注销                                │\n";
     std::cout << "└─────────────────────────────────────────┘\n\n";
 
     int choice = promptForInt("请输入您的选择: ", 0, 7);
@@ -614,7 +614,7 @@ void MenuHandler::handleViewReservations() {
 
 void MenuHandler::handleViewRecommendations() {
     clearScreen();
-    ui.displayHeader("Book Recommendations");
+    ui.displayHeader("数据推荐");
 
     std::cout << "\nPersonalized Book Recommendations for " << currentUser->getName() << "\n\n";
 
@@ -624,9 +624,9 @@ void MenuHandler::handleViewRecommendations() {
     const bool AVAILABLE_ONLY = false; // 显示所有书籍 (用户可以预约不可用的书籍)
 
     std::cout << "正在分析您的阅读偏好并寻找相似的读者...\n";
-    std::cout << "   使用协同过滤与 " << K_NEIGHBORS << " 临近邻居\n\n";
+    std::cout << "   正在寻找 " << K_NEIGHBORS << " 位临近邻居\n\n";
 
-    // Use the KNN algorithm
+    // 使用 KNN 算法
     std::vector<Book> recommendations = recommendationManager.recommendForMember(
         currentUser->getMemberID(),
         TOP_N,
@@ -731,7 +731,7 @@ void MenuHandler::handleViewProfile() {
     ui.displayHeader("个人资料");
 
     std::cout << "\n" << std::string(50, '=') << "\n";
-    std::cout << "会员 ID:       " << currentUser->getMemberID() << "\n";
+    std::cout << "会员 ID:         " << currentUser->getMemberID() << "\n";
     std::cout << "Name:            " << currentUser->getName() << "\n";
     std::cout << "Member Type:     " << (currentUser->getAdmin() ? "管理员" : "会员") << "\n";
     std::cout << "Account Status:  " << (currentUser->isExpired() ? "已过期" : "活跃") << "\n";
@@ -744,7 +744,7 @@ void MenuHandler::handleViewProfile() {
 
     std::cout << "\n借阅统计:\n";
     std::cout << std::string(50, '-') << "\n";
-    std::cout << "当前已借阅: " << activeTransactions.size() << "\n";
+    std::cout << "当前已借阅:   " << activeTransactions.size() << "\n";
     std::cout << "总借阅数:     " << history.size() << "\n";
     std::cout << std::string(50, '=') << "\n";
 
@@ -757,11 +757,11 @@ void MenuHandler::handleManageBooks() {
 
     std::cout << "\n";
     std::cout << "┌─────────────────────────────────────────┐\n";
-    std::cout << "│  1. 新增图书                                │\n";
-    std::cout << "│  2. 更新图书                                │\n";
-    std::cout << "│  3. 删除图书                                │\n";
-    std::cout << "│  4. 查看所有图书                              │\n";
-    std::cout << "│  0. 回退                                  │\n";
+    std::cout << "│  1. 新增图书                            │\n";
+    std::cout << "│  2. 更新图书                            │\n";
+    std::cout << "│  3. 删除图书                            │\n";
+    std::cout << "│  4. 查看所有图书                        │\n";
+    std::cout << "│  0. 回退                                │\n";
     std::cout << "└─────────────────────────────────────────┘\n\n";
 
     int choice = promptForInt("请输入您的选择: ", 0, 4);
@@ -786,11 +786,11 @@ void MenuHandler::handleManageMembers() {
 
     std::cout << "\n";
     std::cout << "┌─────────────────────────────────────────┐\n";
-    std::cout << "│  1. 新增会员                                │\n";
-    std::cout << "│  2. 更新会员                                │\n";
-    std::cout << "│  3. 删除会员                                │\n";
-    std::cout << "│  4. 查看所有会员                              │\n";
-    std::cout << "│  0. 回退                                  │\n";
+    std::cout << "│  1. 新增会员                            │\n";
+    std::cout << "│  2. 更新会员                            │\n";
+    std::cout << "│  3. 删除会员                            │\n";
+    std::cout << "│  4. 查看所有会员                        │\n";
+    std::cout << "│  0. 回退                                │\n";
     std::cout << "└─────────────────────────────────────────┘\n\n";
 
     int choice = promptForInt("请输入您的选择: ", 0, 4);
@@ -811,14 +811,14 @@ void MenuHandler::handleManageMembers() {
 
 void MenuHandler::handleManageTransactions() {
     clearScreen();
-    ui.displayHeader("Manage Transactions");
+    ui.displayHeader("管理交易");
 
     std::cout << "\n";
     std::cout << "┌─────────────────────────────────────────┐\n";
-    std::cout << "│  1. 查看所有交易                              │\n";
-    std::cout << "│  2. 查看活跃交易                              │\n";
-    std::cout << "│  3. 手动归还                                │\n";
-    std::cout << "│  0. 回退                                  │\n";
+    std::cout << "│  1. 查看所有交易                        │\n";
+    std::cout << "│  2. 查看活跃交易                        │\n";
+    std::cout << "│  3. 手动归还                            │\n";
+    std::cout << "│  0. 回退                                │\n";
     std::cout << "└─────────────────────────────────────────┘\n\n";
 
     int choice = promptForInt("请输入您的选择: ", 0, 3);
@@ -889,11 +889,11 @@ void MenuHandler::handleGenerateReports() {
 
     std::cout << "\n";
     std::cout << "┌─────────────────────────────────────────┐\n";
-    std::cout << "│  1. 库存报告                                │\n";
-    std::cout << "│  2. 会员报告                                │\n";
-    std::cout << "│  3. 交易报告                                │\n";
-    std::cout << "│  4. 统计报告                                │\n";
-    std::cout << "│  0. 回退                                  │\n";
+    std::cout << "│  1. 库存报告                            │\n";
+    std::cout << "│  2. 会员报告                            │\n";
+    std::cout << "│  3. 交易报告                            │\n";
+    std::cout << "│  4. 统计报告                            │\n";
+    std::cout << "│  0. 回退                                │\n";
     std::cout << "└─────────────────────────────────────────┘\n\n";
 
     int choice = promptForInt("请输入您的选择: ", 0, 5);
@@ -918,9 +918,9 @@ void MenuHandler::handleBackupRestore() {
 
     std::cout << "\n";
     std::cout << "┌─────────────────────────────────────────┐\n";
-    std::cout << "│  1. 备份数据                                │\n";
-    std::cout << "│  2. 还原数据                                │\n";
-    std::cout << "│  0. 回退                                  │\n";
+    std::cout << "│  1. 备份数据                            │\n";
+    std::cout << "│  2. 还原数据                            │\n";
+    std::cout << "│  0. 回退                                │\n";
     std::cout << "└─────────────────────────────────────────┘\n\n";
 
     int choice = promptForInt("请输入您的选择: ", 0, 2);
@@ -943,10 +943,10 @@ void MenuHandler::handleSystemSettings() {
 
     std::cout << "\n";
     std::cout << "┌─────────────────────────────────────────┐\n";
-    std::cout << "│  1. 变更UI模式                              │\n";
-    std::cout << "│  2. 变更借阅期限                              │\n";
-    std::cout << "│  3. 变更罚款设定                              │\n";
-    std::cout << "│  0. 回退                                  │\n";
+    std::cout << "│  1. 变更UI模式                          │\n";
+    std::cout << "│  2. 变更借阅期限                        │\n";
+    std::cout << "│  3. 变更罚款设定                        │\n";
+    std::cout << "│  0. 回退                                │\n";
     std::cout << "└─────────────────────────────────────────┘\n\n";
 
     int choice = promptForInt("请输入您的选择: ", 0, 3);
@@ -1236,13 +1236,13 @@ void MenuHandler::handleAddMember() {
     if (memberManager.addMember(*newMember)) {
         displayMessage("会员添加成功!", "success");
         std::cout << "\n会员详情:\n";
-        std::cout << "  会员 ID:        " << memberID << "\n";
+        std::cout << "  会员 ID:          " << memberID << "\n";
         std::cout << "  姓名:             " << name << "\n";
         std::cout << "  类型:             " << (isAdmin ? "管理员" : "普通用户") << "\n";
-        std::cout << "  注册:     " << registrationDate << "\n";
-        std::cout << "  到期:           " << expiryDate << "\n";
-        std::cout << "  最大可借书数量:        " << maxBooksAllowed << "\n";
-        std::cout << "  偏好:      ";
+        std::cout << "  注册:             " << registrationDate << "\n";
+        std::cout << "  到期:             " << expiryDate << "\n";
+        std::cout << "  最大可借书数量:   " << maxBooksAllowed << "\n";
+        std::cout << "  偏好:             ";
         if (preferences.empty()) {
             std::cout << "None\n";
         } else {
@@ -1274,11 +1274,11 @@ void MenuHandler::handleUpdateMember() {
         return;
     }
 
-    std::cout << "\nCurrent Information:\n";
+    std::cout << "\n当前信息:\n";
     std::cout << std::string(50, '-') << "\n";
-    std::cout << "会员 ID: " << member->getMemberID() << "\n";
+    std::cout << "会员 ID:   " << member->getMemberID() << "\n";
     std::cout << "姓名:      " << member->getName() << "\n";
-    std::cout << "手机号码:     " << member->getPhoneNumber() << "\n";
+    std::cout << "手机号码:  " << member->getPhoneNumber() << "\n";
     std::cout << std::string(50, '-') << "\n\n";
 
     std::cout << "输入新值 (按下 Enter 以保留当前值):\n\n";
@@ -1328,9 +1328,9 @@ void MenuHandler::handleDeleteMember() {
 
     std::cout << "\n会员信息:\n";
     std::cout << std::string(50, '-') << "\n";
-    std::cout << "会员 ID: " << member->getMemberID() << "\n";
+    std::cout << "会员 ID:   " << member->getMemberID() << "\n";
     std::cout << "姓名:      " << member->getName() << "\n";
-    std::cout << "手机号码:     " << member->getPhoneNumber() << "\n";
+    std::cout << "手机号码:  " << member->getPhoneNumber() << "\n";
     std::cout << std::string(50, '-') << "\n\n";
 
     if (!confirmAction("您确定要删除这位会员吗?")) {
@@ -1359,8 +1359,8 @@ void MenuHandler::handleViewAllMembers() {
     }
 
     std::cout << "\n" << std::string(100, '=') << "\n";
-    std::cout << std::left << std::setw(12) << "会员 ID"
-              << std::setw(25) << "姓名"
+    std::cout << std::left << std::setw(14) << "会员 ID"
+              << std::setw(27) << "姓名"
               << std::setw(15) << "手机号码"
               << std::setw(10) << "类型"
               << std::setw(8) << "状态" << "\n";
@@ -1623,12 +1623,12 @@ void MenuHandler::handleBackupData() {
         displayMessage("备份创建成功!", "success");
         std::cout << "\n";
         std::cout << "╔════════════════════════════════════════════════╗\n";
-        std::cout << "║                   备份完成                         ║\n";
+        std::cout << "║                   备份完成                     ║\n";
         std::cout << "╠════════════════════════════════════════════════╣\n";
-        std::cout << "║  备份 ID:   " << std::left << std::setw(33) << latestBackup.backupID << "║\n";
+        std::cout << "║  备份 ID:     " << std::left << std::setw(33) << latestBackup.backupID << "║\n";
         std::cout << "║  时间:        " << std::left << std::setw(33) << latestBackup.backupTime << "║\n";
-        std::cout << "║  描述: " << std::left << std::setw(33) << latestBackup.description.substr(0, 32) << "║\n";
-        std::cout << "║  状态:      " << std::left << std::setw(35) << (latestBackup.isValid ? "✓ Valid" : "✗ Invalid") << "║\n";
+        std::cout << "║  描述:        " << std::left << std::setw(33) << latestBackup.description.substr(0, 32) << "║\n";
+        std::cout << "║  状态:        " << std::left << std::setw(35) << (latestBackup.isValid ? "✓ Valid" : "✗ Invalid") << "║\n";
         std::cout << "╚════════════════════════════════════════════════╝\n";
     } else {
         displayMessage("备份创建失败, 请检查上面的错误信息", "error");
@@ -1857,13 +1857,13 @@ void MenuHandler::handleManageReservations() {
 
     std::cout << "\n";
     std::cout << "┌─────────────────────────────────────────┐\n";
-    std::cout << "│  1. 查看所有预订                              │\n";
-    std::cout << "│  2. 查看有效预订                              │\n";
-    std::cout << "│  3. 添加预订                                │\n";
-    std::cout << "│  4. 更新预订                                │\n";
-    std::cout << "│  5. 取消预订                                │\n";
-    std::cout << "│  6. 搜索预订                                │\n";
-    std::cout << "│  0. 回退                                  │\n";
+    std::cout << "│  1. 查看所有预订                        │\n";
+    std::cout << "│  2. 查看有效预订                        │\n";
+    std::cout << "│  3. 添加预订                            │\n";
+    std::cout << "│  4. 更新预订                            │\n";
+    std::cout << "│  5. 取消预订                            │\n";
+    std::cout << "│  6. 搜索预订                            │\n";
+    std::cout << "│  0. 回退                                │\n";
     std::cout << "└─────────────────────────────────────────┘\n\n";
 
     int choice = promptForInt("请输入您的选择: ", 0, 6);
@@ -2467,14 +2467,14 @@ void MenuHandler::displayBookDetails(Book* book) {
     ui.displayHeader("图书详细信息");
 
     std::cout << "\n" << std::string(60, '=') << "\n";
-    std::cout << "ISBN:           " << book->getISBN() << "\n";
-    std::cout << "书名:          " << book->getTitle() << "\n";
-    std::cout << "作者:         " << book->getAuthor() << "\n";
-    std::cout << "出版社:      " << book->getPublisher() << "\n";
-    std::cout << "类型:       " << book->getGenre() << "\n";
-    std::cout << "总数量:   " << book->getTotalCopies() << "\n";
-    std::cout << "可用:      " << book->getAvailableCopies() << "\n";
-    std::cout << "状态:         " << (book->canBorrow() ? "可用" : "不可用") << "\n";
+    std::cout << "ISBN:            " << book->getISBN() << "\n";
+    std::cout << "书名:            " << book->getTitle() << "\n";
+    std::cout << "作者:            " << book->getAuthor() << "\n";
+    std::cout << "出版社:          " << book->getPublisher() << "\n";
+    std::cout << "类型:            " << book->getGenre() << "\n";
+    std::cout << "总数量:          " << book->getTotalCopies() << "\n";
+    std::cout << "可用:            " << book->getAvailableCopies() << "\n";
+    std::cout << "状态:            " << (book->canBorrow() ? "可用" : "不可用") << "\n";
 
     // 显示预订队列信息
     int queueLength = reservationManager.getQueueLength(book->getISBN());
